@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.grocery.controller.ReportsController"
+      styleClass="page-root" spacing="16">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="Reports" styleClass="page-title"/>
+
+    <!-- Filter row -->
+    <HBox styleClass="card" spacing="14" alignment="CENTER_LEFT">
+        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+        <VBox spacing="4">
+            <Label text="Report Type" styleClass="field-label"/>
+            <ComboBox fx:id="cmbReportType" prefWidth="130" styleClass="combo-field"/>
+        </VBox>
+        <VBox spacing="4">
+            <Label text="From Date" styleClass="field-label"/>
+            <DatePicker fx:id="fromDate" prefWidth="150" styleClass="date-picker-field"/>
+        </VBox>
+        <VBox spacing="4">
+            <Label text="To Date" styleClass="field-label"/>
+            <DatePicker fx:id="toDate" prefWidth="150" styleClass="date-picker-field"/>
+        </VBox>
+        <VBox spacing="4" alignment="BOTTOM_LEFT">
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="📊  Generate Report" onAction="#handleGenerateReport" styleClass="btn-primary" prefHeight="38"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="🖨  Print" onAction="#handlePrintReport" styleClass="btn-outline"/>
+    </HBox>
+
+    <!-- Summary cards -->
+    <HBox spacing="16">
+        <VBox styleClass="stat-card card-green" HBox.hgrow="ALWAYS" spacing="4">
+            <Label text="TOTAL SALES" styleClass="stat-label"/>
+            <Label fx:id="lblTotalSales" text="₹0.00" styleClass="stat-value"/>
+        </VBox>
+        <VBox styleClass="stat-card card-blue" HBox.hgrow="ALWAYS" spacing="4">
+            <Label text="TOTAL PROFIT" styleClass="stat-label"/>
+            <Label fx:id="lblTotalProfit" text="₹0.00" styleClass="stat-value"/>
+        </VBox>
+        <VBox styleClass="stat-card card-purple" HBox.hgrow="ALWAYS" spacing="4">
+            <Label text="BILLS COUNT" styleClass="stat-label"/>
+            <Label fx:id="lblBillCount" text="0" styleClass="stat-value"/>
+        </VBox>
+    </HBox>
+
+    <!-- Bills table with search bar -->
+    <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="10">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="Transaction Details" styleClass="card-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="billSearchField"
+                       promptText="🔍  Search by customer name or bill no..."
+                       prefWidth="320"
+                       styleClass="search-field"
+                       onKeyReleased="#handleBillSearch"/>
+        </HBox>
+        <TableView fx:id="reportTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colBillNo"   text="Bill No"  prefWidth="120"/>
+                <TableColumn fx:id="colCustomer" text="Customer" prefWidth="160"/>
+                <TableColumn fx:id="colDate"     text="Date"     prefWidth="160"/>
+                <TableColumn fx:id="colPayment"  text="Payment"  prefWidth="100"/>
+                <TableColumn fx:id="colAmount"   text="Amount"   prefWidth="120"/>
+            </columns>
+            <placeholder><Label text="No bills found for the selected period." styleClass="table-placeholder"/></placeholder>
+        </TableView>
+        <Label text="💡 Tip: Use search to quickly find a specific customer or bill number." styleClass="hint-label"/>
+    </VBox>
+</VBox>

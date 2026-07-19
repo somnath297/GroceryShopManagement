@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.grocery.controller.MainController"
+            styleClass="main-root">
+
+    <!-- ── LEFT SIDEBAR ──────────────────────────────── -->
+    <left>
+        <VBox styleClass="sidebar" prefWidth="230" spacing="0">
+
+            <!-- Shop name header -->
+            <VBox styleClass="sidebar-header" spacing="4" alignment="CENTER">
+                <Label text="🛒" style="-fx-font-size: 32px;"/>
+                <Label fx:id="shopNameLabel" text="Grocery Shop" styleClass="sidebar-shop-name"/>
+            </VBox>
+
+            <!-- Nav menu -->
+            <VBox styleClass="sidebar-nav" spacing="4" VBox.vgrow="ALWAYS">
+                <Button fx:id="btnDashboard" text="🏠  Dashboard"   onAction="#showDashboard"  styleClass="nav-btn" maxWidth="Infinity"/>
+                <Button fx:id="btnBilling"   text="🧾  Billing"     onAction="#showBilling"    styleClass="nav-btn" maxWidth="Infinity"/>
+                <Button fx:id="btnProducts"  text="📦  Products"    onAction="#showProducts"   styleClass="nav-btn" maxWidth="Infinity"/>
+                <Button fx:id="btnCustomers" text="👥  Customers"   onAction="#showCustomers"  styleClass="nav-btn" maxWidth="Infinity"/>
+                <Button fx:id="btnSuppliers" text="🚚  Suppliers"   onAction="#showSuppliers"  styleClass="nav-btn" maxWidth="Infinity"/>
+                <Button fx:id="btnInventory" text="🏪  Inventory"   onAction="#showInventory"  styleClass="nav-btn" maxWidth="Infinity"/>
+                <Button fx:id="btnReports"   text="📊  Reports"     onAction="#showReports"    styleClass="nav-btn" maxWidth="Infinity"/>
+                <Button fx:id="btnBackup"    text="💾  Backup"      onAction="#showBackup"     styleClass="nav-btn" maxWidth="Infinity"/>
+                <Button fx:id="btnSettings"  text="⚙  Settings"    onAction="#showSettings"   styleClass="nav-btn" maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- User info + logout at bottom -->
+            <VBox styleClass="sidebar-footer" spacing="8" alignment="CENTER">
+                <Label fx:id="userLabel" text="admin" styleClass="sidebar-username"/>
+                <Button text="Logout" onAction="#handleLogout" styleClass="btn-logout" maxWidth="Infinity"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- ── CENTER CONTENT AREA ───────────────────────── -->
+    <center>
+        <StackPane fx:id="contentArea" styleClass="content-area"/>
+    </center>
+</BorderPane>

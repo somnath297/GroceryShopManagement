@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.grocery.controller.CustomerController"
+      styleClass="page-root" spacing="16">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Customers" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="🔍  Search by name or mobile..." prefWidth="280" styleClass="search-field"/>
+    </HBox>
+
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- Customer Table -->
+        <VBox HBox.hgrow="ALWAYS" styleClass="card" spacing="10">
+            <TableView fx:id="customerTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId"      text="#"       prefWidth="45"/>
+                    <TableColumn fx:id="colName"    text="Name"    prefWidth="160"/>
+                    <TableColumn fx:id="colMobile"  text="Mobile"  prefWidth="110"/>
+                    <TableColumn fx:id="colAddress" text="Address" prefWidth="180"/>
+                    <TableColumn fx:id="colDate"    text="Added"   prefWidth="130"/>
+                </columns>
+                <placeholder><Label text="No customers yet." styleClass="table-placeholder"/></placeholder>
+            </TableView>
+
+            <!-- Purchase History -->
+            <Label text="Purchase History" styleClass="card-title"/>
+            <TableView fx:id="historyTable" prefHeight="180">
+                <columns>
+                    <TableColumn fx:id="colBillNo"   text="Bill No"  prefWidth="110"/>
+                    <TableColumn fx:id="colBillDate" text="Date"     prefWidth="140"/>
+                    <TableColumn fx:id="colPayment"  text="Payment"  prefWidth="90"/>
+                    <TableColumn fx:id="colAmount"   text="Amount"   prefWidth="110"/>
+                </columns>
+                <placeholder><Label text="Select a customer to view purchase history." styleClass="table-placeholder"/></placeholder>
+            </TableView>
+        </VBox>
+
+        <!-- Form -->
+        <VBox styleClass="card form-panel" spacing="14" prefWidth="300" minWidth="280">
+            <Label fx:id="formTitleLabel" text="Add New Customer" styleClass="card-title"/>
+            <VBox spacing="6"><Label text="Full Name *" styleClass="field-label"/>
+                <TextField fx:id="fldName" promptText="Customer name" styleClass="input-field"/></VBox>
+            <VBox spacing="6"><Label text="Mobile Number" styleClass="field-label"/>
+                <TextField fx:id="fldMobile" promptText="10-digit mobile" styleClass="input-field"/></VBox>
+            <VBox spacing="6"><Label text="Address" styleClass="field-label"/>
+                <TextField fx:id="fldAddress" promptText="Village / Area" styleClass="input-field"/></VBox>
+
+            <Label fx:id="formStatusLabel" wrapText="true" maxWidth="280"/>
+
+            <HBox spacing="10">
+                <Button text="💾  Save"   onAction="#handleSave"   styleClass="btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button fx:id="btnDelete" text="🗑  Delete" onAction="#handleDelete" styleClass="btn-danger" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            </HBox>
+            <Button text="✕  Clear / New" onAction="#handleClear" styleClass="btn-outline" maxWidth="Infinity"/>
+        </VBox>
+    </HBox>
+</VBox>

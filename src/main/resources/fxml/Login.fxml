@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.grocery.controller.LoginController"
+           styleClass="login-root">
+
+    <!-- Left decorative panel -->
+    <HBox>
+        <VBox HBox.hgrow="ALWAYS" styleClass="login-left-panel" alignment="CENTER" spacing="20">
+            <Label text="🛒" style="-fx-font-size: 72px;"/>
+            <Label text="Grocery Shop" styleClass="login-brand-title"/>
+            <Label text="Management System" styleClass="login-brand-subtitle"/>
+            <Label text="Simple • Fast • Reliable" styleClass="login-brand-tagline"/>
+            <VBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 40 60 0 60;">
+                <Label text="✓  Offline — No internet needed" styleClass="login-feature"/>
+                <Label text="✓  Fast billing" styleClass="login-feature"/>
+                <Label text="✓  Stock management" styleClass="login-feature"/>
+                <Label text="✓  Daily reports" styleClass="login-feature"/>
+            </VBox>
+        </VBox>
+
+        <!-- Right login form panel -->
+        <VBox HBox.hgrow="ALWAYS" styleClass="login-right-panel" alignment="CENTER" spacing="0">
+            <VBox styleClass="login-card" spacing="22" maxWidth="380" alignment="CENTER_LEFT">
+                <VBox spacing="6">
+                    <Label text="Welcome Back" styleClass="login-welcome"/>
+                    <Label text="Please enter your credentials to continue" styleClass="login-welcome-sub"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="Username" styleClass="field-label"/>
+                    <TextField fx:id="usernameField" promptText="Enter username" styleClass="input-field"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="Password" styleClass="field-label"/>
+                    <PasswordField fx:id="passwordField" promptText="Enter password" styleClass="input-field"/>
+                </VBox>
+
+                <Label fx:id="errorLabel" styleClass="error-banner" wrapText="true" maxWidth="340"/>
+
+                <VBox spacing="10">
+                    <Button text="LOGIN" onAction="#handleLogin" styleClass="btn-primary" maxWidth="Infinity" prefHeight="44"/>
+                    <Button text="EXIT" onAction="#handleExit" styleClass="btn-outline" maxWidth="Infinity" prefHeight="40"/>
+                </VBox>
+
+                <Label text="Default credentials: admin / admin123" styleClass="login-hint"/>
+            </VBox>
+        </VBox>
+    </HBox>
+</StackPane>

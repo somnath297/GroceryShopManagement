@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.grocery.controller.BackupController"
+      styleClass="page-root" spacing="20">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <Label text="Backup &amp; Restore" styleClass="page-title"/>
+
+    <!-- Info cards -->
+    <HBox spacing="16">
+        <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="8">
+            <Label text="Database Location" styleClass="card-title"/>
+            <Label fx:id="lblDbPath" text="Loading..." styleClass="path-label" wrapText="true"/>
+        </VBox>
+        <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="8">
+            <Label text="Backup Folder" styleClass="card-title"/>
+            <Label fx:id="lblBackupDir" text="Loading..." styleClass="path-label" wrapText="true"/>
+            <Button text="📂  Open Folder" onAction="#handleOpenBackupFolder" styleClass="btn-outline-small"/>
+        </VBox>
+    </HBox>
+
+    <!-- Actions -->
+    <HBox spacing="16">
+        <VBox styleClass="card action-card" HBox.hgrow="ALWAYS" spacing="14" alignment="CENTER">
+            <Label text="💾" style="-fx-font-size: 42px;"/>
+            <Label text="Create Backup" styleClass="card-title"/>
+            <Label text="Saves a copy of all your data to the Backups folder. Do this regularly!" styleClass="card-desc" wrapText="true" textAlignment="CENTER"/>
+            <Button text="Create Backup Now" onAction="#handleBackup" styleClass="btn-primary" prefHeight="44" prefWidth="200"/>
+        </VBox>
+        <VBox styleClass="card action-card" HBox.hgrow="ALWAYS" spacing="14" alignment="CENTER">
+            <Label text="📤" style="-fx-font-size: 42px;"/>
+            <Label text="Restore Backup" styleClass="card-title"/>
+            <Label text="Restore all data from a previous backup file. Current data will be replaced." styleClass="card-desc" wrapText="true" textAlignment="CENTER"/>
+            <Button text="Select &amp; Restore Backup" onAction="#handleRestore" styleClass="btn-warning" prefHeight="44" prefWidth="200"/>
+        </VBox>
+    </HBox>
+
+    <Label fx:id="statusLabel" wrapText="true" maxWidth="Infinity"/>
+
+    <!-- Backup history -->
+    <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="10">
+        <Label text="Backup History" styleClass="card-title"/>
+        <TableView fx:id="backupTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colFilename" text="Filename"      prefWidth="260"/>
+                <TableColumn fx:id="colDate"     text="Backup Date"  prefWidth="160"/>
+                <TableColumn fx:id="colPath"     text="File Path"    prefWidth="400"/>
+            </columns>
+            <placeholder><Label text="No backups created yet." styleClass="table-placeholder"/></placeholder>
+        </TableView>
+    </VBox>
+</VBox>

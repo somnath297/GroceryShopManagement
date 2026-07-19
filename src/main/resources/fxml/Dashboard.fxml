@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.grocery.controller.DashboardController"
+      styleClass="page-root" spacing="20">
+
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <!-- Page Title -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <Label text="Dashboard" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="⟳  Refresh" onAction="#handleRefresh" styleClass="btn-outline-small"/>
+    </HBox>
+
+    <!-- Stats Cards Row -->
+    <HBox spacing="16">
+        <VBox styleClass="stat-card card-green" HBox.hgrow="ALWAYS" spacing="6">
+            <Label text="TODAY'S SALES" styleClass="stat-label"/>
+            <Label fx:id="todaySalesLabel" text="₹0.00" styleClass="stat-value"/>
+        </VBox>
+        <VBox styleClass="stat-card card-blue" HBox.hgrow="ALWAYS" spacing="6">
+            <Label text="TODAY'S PROFIT" styleClass="stat-label"/>
+            <Label fx:id="todayProfitLabel" text="₹0.00" styleClass="stat-value"/>
+        </VBox>
+        <VBox styleClass="stat-card card-purple" HBox.hgrow="ALWAYS" spacing="6">
+            <Label text="TOTAL PRODUCTS" styleClass="stat-label"/>
+            <Label fx:id="totalProductsLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+        <VBox styleClass="stat-card card-teal" HBox.hgrow="ALWAYS" spacing="6">
+            <Label text="CUSTOMERS" styleClass="stat-label"/>
+            <Label fx:id="totalCustomersLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+        <VBox styleClass="stat-card card-red" HBox.hgrow="ALWAYS" spacing="6">
+            <Label text="LOW STOCK ITEMS" styleClass="stat-label"/>
+            <Label fx:id="lowStockLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+    </HBox>
+
+    <!-- Tables Row -->
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- Recent Bills with search bar -->
+        <VBox HBox.hgrow="ALWAYS" styleClass="card" spacing="10">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Recent Bills" styleClass="card-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="billSearchField"
+                           promptText="🔍  Search bill no. or customer..."
+                           prefWidth="260"
+                           styleClass="search-field"
+                           onKeyReleased="#handleBillSearch"/>
+            </HBox>
+            <TableView fx:id="recentBillsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colBillNo"   text="Bill No"  prefWidth="110"/>
+                    <TableColumn fx:id="colCustomer" text="Customer" prefWidth="150"/>
+                    <TableColumn fx:id="colAmount"   text="Amount"   prefWidth="110"/>
+                    <TableColumn fx:id="colPayment"  text="Payment"  prefWidth="90"/>
+                    <TableColumn fx:id="colDate"     text="Date"     prefWidth="150"/>
+                </columns>
+                <placeholder><Label text="No bills found." styleClass="table-placeholder"/></placeholder>
+            </TableView>
+        </VBox>
+
+        <!-- Low Stock -->
+        <VBox HBox.hgrow="ALWAYS" styleClass="card" spacing="10" maxWidth="380">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="⚠  Low Stock Alert" styleClass="card-title card-title-warning"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="lowStockSearchField"
+                           promptText="🔍  Filter..."
+                           prefWidth="130"
+                           styleClass="search-field"
+                           onKeyReleased="#handleLowStockSearch"/>
+            </HBox>
+            <TableView fx:id="lowStockTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colLsName"      text="Product"   prefWidth="130"/>
+                    <TableColumn fx:id="colLsQty"       text="Qty"       prefWidth="60"/>
+                    <TableColumn fx:id="colLsUnit"      text="Unit"      prefWidth="55"/>
+                    <TableColumn fx:id="colLsThreshold" text="Min Stock" prefWidth="80"/>
+                </columns>
+                <placeholder><Label text="All products are well stocked!" styleClass="table-placeholder"/></placeholder>
+            </TableView>
+        </VBox>
+    </HBox>
+</VBox>

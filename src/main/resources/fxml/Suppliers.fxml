@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.grocery.controller.SupplierController"
+      styleClass="page-root" spacing="16">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Suppliers" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="🔍  Search suppliers..." prefWidth="260" styleClass="search-field"/>
+    </HBox>
+
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <VBox HBox.hgrow="ALWAYS" styleClass="card" spacing="10">
+            <TableView fx:id="supplierTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId"      text="#"       prefWidth="45"/>
+                    <TableColumn fx:id="colName"    text="Name"    prefWidth="160"/>
+                    <TableColumn fx:id="colPhone"   text="Phone"   prefWidth="120"/>
+                    <TableColumn fx:id="colAddress" text="Address" prefWidth="200"/>
+                </columns>
+                <placeholder><Label text="No suppliers yet." styleClass="table-placeholder"/></placeholder>
+            </TableView>
+
+            <Label text="Supplied Products" styleClass="card-title"/>
+            <TableView fx:id="productTable" prefHeight="180">
+                <columns>
+                    <TableColumn fx:id="colProdName"     text="Product"  prefWidth="160"/>
+                    <TableColumn fx:id="colProdCategory" text="Category" prefWidth="120"/>
+                    <TableColumn fx:id="colProdQty"      text="Stock"    prefWidth="80"/>
+                    <TableColumn fx:id="colProdUnit"     text="Unit"     prefWidth="70"/>
+                </columns>
+                <placeholder><Label text="Select a supplier to see their products." styleClass="table-placeholder"/></placeholder>
+            </TableView>
+        </VBox>
+
+        <VBox styleClass="card form-panel" spacing="14" prefWidth="300" minWidth="280">
+            <Label fx:id="formTitleLabel" text="Add New Supplier" styleClass="card-title"/>
+            <VBox spacing="6"><Label text="Supplier Name *" styleClass="field-label"/>
+                <TextField fx:id="fldName" promptText="e.g. Agro Traders" styleClass="input-field"/></VBox>
+            <VBox spacing="6"><Label text="Phone Number" styleClass="field-label"/>
+                <TextField fx:id="fldPhone" promptText="Contact number" styleClass="input-field"/></VBox>
+            <VBox spacing="6"><Label text="Address" styleClass="field-label"/>
+                <TextField fx:id="fldAddress" promptText="City / District" styleClass="input-field"/></VBox>
+
+            <Label fx:id="formStatusLabel" wrapText="true" maxWidth="280"/>
+
+            <HBox spacing="10">
+                <Button text="💾  Save"   onAction="#handleSave"   styleClass="btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button fx:id="btnDelete" text="🗑  Delete" onAction="#handleDelete" styleClass="btn-danger" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            </HBox>
+            <Button text="✕  Clear / New" onAction="#handleClear" styleClass="btn-outline" maxWidth="Infinity"/>
+        </VBox>
+    </HBox>
+</VBox>

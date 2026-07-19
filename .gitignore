@@ -1,0 +1,39 @@
+# ── Maven build output ────────────────────────────────────
+target/
+
+# ── IntelliJ IDEA ─────────────────────────────────────────
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# ── Eclipse ───────────────────────────────────────────────
+.classpath
+.project
+.settings/
+bin/
+
+# ── VS Code ───────────────────────────────────────────────
+.vscode/
+
+# ── NetBeans ──────────────────────────────────────────────
+nbactions.xml
+nb-configuration.xml
+
+# ── OS files ──────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs ──────────────────────────────────────────────────
+*.log
+
+# ── Installer output ──────────────────────────────────────
+installer/
+portable/
+
+# ── Local database (never commit user data) ───────────────
+*.db
+*.db-shm
+*.db-wal

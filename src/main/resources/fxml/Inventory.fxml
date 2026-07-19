@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.grocery.controller.InventoryController"
+      styleClass="page-root" spacing="16">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="Inventory Management" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="⟳  Refresh" onAction="#handleRefresh" styleClass="btn-outline-small"/>
+    </HBox>
+
+    <!-- Summary cards -->
+    <HBox spacing="14">
+        <VBox styleClass="stat-card card-blue" HBox.hgrow="ALWAYS" spacing="4">
+            <Label text="TOTAL PRODUCTS" styleClass="stat-label"/>
+            <Label fx:id="lblTotalProducts" text="0" styleClass="stat-value"/>
+        </VBox>
+        <VBox styleClass="stat-card card-orange" HBox.hgrow="ALWAYS" spacing="4">
+            <Label text="LOW STOCK" styleClass="stat-label"/>
+            <Label fx:id="lblLowStockCount" text="0" styleClass="stat-value"/>
+        </VBox>
+        <VBox styleClass="stat-card card-red" HBox.hgrow="ALWAYS" spacing="4">
+            <Label text="OUT OF STOCK" styleClass="stat-label"/>
+            <Label fx:id="lblOutOfStock" text="0" styleClass="stat-value"/>
+        </VBox>
+    </HBox>
+
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- Stock Table -->
+        <VBox HBox.hgrow="ALWAYS" styleClass="card" spacing="10">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="🔍  Filter products..." prefWidth="240" styleClass="search-field"/>
+                <CheckBox fx:id="cbLowStockOnly" text="Low Stock Only" styleClass="check-field"/>
+            </HBox>
+            <TableView fx:id="stockTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colName"      text="Product Name" prefWidth="200"/>
+                    <TableColumn fx:id="colCategory"  text="Category"     prefWidth="120"/>
+                    <TableColumn fx:id="colQty"       text="Current Stock" prefWidth="110"/>
+                    <TableColumn fx:id="colUnit"      text="Unit"         prefWidth="70"/>
+                    <TableColumn fx:id="colThreshold" text="Min Stock"    prefWidth="90"/>
+                </columns>
+                <placeholder><Label text="No products in inventory." styleClass="table-placeholder"/></placeholder>
+            </TableView>
+            <Label text="💡 Yellow = Low Stock | Red = Out of Stock | Double-click to restock" styleClass="hint-label"/>
+        </VBox>
+
+        <!-- Add Stock Panel -->
+        <VBox styleClass="card form-panel" spacing="14" prefWidth="300" minWidth="280">
+            <Label text="Add Stock (Restock)" styleClass="card-title"/>
+            <VBox spacing="6">
+                <Label text="Select Product" styleClass="field-label"/>
+                <ComboBox fx:id="cmbProduct" maxWidth="Infinity" styleClass="combo-field" promptText="Choose product"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="Quantity to Add" styleClass="field-label"/>
+                <TextField fx:id="fldAddQty" promptText="e.g. 50" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="Note (optional)" styleClass="field-label"/>
+                <TextField fx:id="fldNote" promptText="e.g. From supplier" styleClass="input-field"/>
+            </VBox>
+
+            <Label fx:id="statusLabel" wrapText="true" maxWidth="280"/>
+
+            <Button text="➕  Add to Stock" onAction="#handleAddStock" styleClass="btn-primary" maxWidth="Infinity" prefHeight="44"/>
+        </VBox>
+    </HBox>
+</VBox>

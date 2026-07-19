@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.grocery.controller.ProductController"
+      styleClass="page-root" spacing="16">
+
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <!-- ── LEFT: Product Table ──────────────────────── -->
+    <VBox HBox.hgrow="ALWAYS" styleClass="card" spacing="12">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label text="Products" styleClass="page-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="searchField" promptText="🔍  Search by name, barcode, category..." prefWidth="280" styleClass="search-field"/>
+        </HBox>
+
+        <TableView fx:id="productTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colId"       text="#"        prefWidth="45"/>
+                <TableColumn fx:id="colName"     text="Name"     prefWidth="160"/>
+                <TableColumn fx:id="colCategory" text="Category" prefWidth="110"/>
+                <TableColumn fx:id="colBarcode"  text="Barcode"  prefWidth="100"/>
+                <TableColumn fx:id="colPurchase" text="Cost"     prefWidth="90"/>
+                <TableColumn fx:id="colSelling"  text="Price"    prefWidth="90"/>
+                <TableColumn fx:id="colQty"      text="Stock"    prefWidth="70"/>
+                <TableColumn fx:id="colUnit"     text="Unit"     prefWidth="60"/>
+                <TableColumn fx:id="colSupplier" text="Supplier" prefWidth="110"/>
+            </columns>
+            <placeholder><Label text="No products found. Add your first product →" styleClass="table-placeholder"/></placeholder>
+        </TableView>
+        <Label text="💡 Click a row to edit. Red rows = low stock." styleClass="hint-label"/>
+    </VBox>
+
+    <!-- ── RIGHT: Form Panel ─────────────────────────── -->
+    <VBox styleClass="card form-panel" spacing="14" prefWidth="330" minWidth="300">
+        <Label fx:id="formTitleLabel" text="Add New Product" styleClass="card-title"/>
+
+        <VBox spacing="6">
+            <Label text="Product Name *" styleClass="field-label"/>
+            <TextField fx:id="fldName" promptText="e.g. Basmati Rice" styleClass="input-field"/>
+        </VBox>
+        <VBox spacing="6">
+            <Label text="Category" styleClass="field-label"/>
+            <TextField fx:id="fldCategory" promptText="e.g. Grains" styleClass="input-field"/>
+        </VBox>
+        <VBox spacing="6">
+            <Label text="Barcode (optional)" styleClass="field-label"/>
+            <TextField fx:id="fldBarcode" promptText="Scan or type barcode" styleClass="input-field"/>
+        </VBox>
+        <HBox spacing="10">
+            <VBox HBox.hgrow="ALWAYS" spacing="6">
+                <Label text="Purchase Price *" styleClass="field-label"/>
+                <TextField fx:id="fldPurchasePrice" promptText="0.00" styleClass="input-field"/>
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS" spacing="6">
+                <Label text="Selling Price *" styleClass="field-label"/>
+                <TextField fx:id="fldSellingPrice" promptText="0.00" styleClass="input-field"/>
+            </VBox>
+        </HBox>
+        <HBox spacing="10">
+            <VBox HBox.hgrow="ALWAYS" spacing="6">
+                <Label text="Quantity *" styleClass="field-label"/>
+                <TextField fx:id="fldQuantity" promptText="0" styleClass="input-field"/>
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS" spacing="6">
+                <Label text="Unit" styleClass="field-label"/>
+                <ComboBox fx:id="cmbUnit" maxWidth="Infinity" styleClass="combo-field"/>
+            </VBox>
+        </HBox>
+        <VBox spacing="6">
+            <Label text="Supplier" styleClass="field-label"/>
+            <ComboBox fx:id="cmbSupplier" maxWidth="Infinity" styleClass="combo-field" promptText="Select supplier"/>
+        </VBox>
+        <VBox spacing="6">
+            <Label text="Low Stock Alert (min units)" styleClass="field-label"/>
+            <TextField fx:id="fldLowStockThreshold" promptText="10" styleClass="input-field"/>
+        </VBox>
+
+        <Label fx:id="formStatusLabel" wrapText="true" maxWidth="300"/>
+
+        <HBox spacing="10">
+            <Button fx:id="btnSave"   text="💾  Save"   onAction="#handleSave"   styleClass="btn-primary"  HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            <Button fx:id="btnDelete" text="🗑  Delete" onAction="#handleDelete" styleClass="btn-danger"   HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+        </HBox>
+        <Button fx:id="btnClear" text="✕  Clear / New" onAction="#handleClear" styleClass="btn-outline" maxWidth="Infinity"/>
+    </VBox>
+</HBox>

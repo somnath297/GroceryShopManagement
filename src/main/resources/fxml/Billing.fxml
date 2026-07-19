@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.grocery.controller.BillingController"
+      styleClass="page-root" spacing="16">
+
+    <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+
+    <!-- ── LEFT: Product Search + Cart ──────────────── -->
+    <VBox HBox.hgrow="ALWAYS" styleClass="card" spacing="12">
+
+        <!-- Bill header row -->
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <Label text="🧾  New Bill" styleClass="page-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblBillNumber" text="Bill #: ---" styleClass="bill-info-label"/>
+            <Label fx:id="lblBillDate"   text="Date: ---"   styleClass="bill-info-label"/>
+        </HBox>
+
+        <!-- Product search row -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <VBox HBox.hgrow="ALWAYS" spacing="4">
+                <Label text="Search Product (name or barcode)" styleClass="field-label"/>
+                <TextField fx:id="productSearchField" promptText="Start typing..." styleClass="search-field-large"/>
+            </VBox>
+            <VBox spacing="4" prefWidth="100">
+                <Label text="Quantity" styleClass="field-label"/>
+                <TextField fx:id="quantityField" text="1" styleClass="input-field qty-field"/>
+            </VBox>
+            <VBox spacing="4" alignment="BOTTOM_LEFT">
+                <Region VBox.vgrow="ALWAYS"/>
+                <Button text="➕  Add to Bill" onAction="#handleAddToCart" styleClass="btn-primary" prefHeight="40"/>
+            </VBox>
+        </HBox>
+
+        <!-- Search results list — hidden until results appear -->
+        <ListView fx:id="productSearchList" prefHeight="150" styleClass="product-search-list"
+                  visible="false" managed="false"/>
+
+        <Separator/>
+
+        <!-- Cart Table -->
+        <Label text="Bill Items" styleClass="card-title"/>
+        <TableView fx:id="cartTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colProduct" text="Product" prefWidth="220"/>
+                <TableColumn fx:id="colQty"     text="Qty"     prefWidth="70"/>
+                <TableColumn fx:id="colUnit"    text="Unit"    prefWidth="60"/>
+                <TableColumn fx:id="colRate"    text="Rate"    prefWidth="100"/>
+                <TableColumn fx:id="colTotal"   text="Amount"  prefWidth="110"/>
+            </columns>
+            <placeholder><Label text="No items added yet. Search and add products above." styleClass="table-placeholder"/></placeholder>
+        </TableView>
+
+        <HBox spacing="10">
+            <Button text="🗑  Remove Selected" onAction="#handleRemoveSelected" styleClass="btn-danger-outline"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="✕  New Bill" onAction="#handleNewBill" styleClass="btn-outline"/>
+        </HBox>
+    </VBox>
+
+    <!-- ── RIGHT: Totals + Payment ──────────────────── -->
+    <VBox styleClass="card billing-summary-panel" spacing="14" prefWidth="320" minWidth="300">
+
+        <Label text="Bill Summary" styleClass="card-title"/>
+
+        <!-- Customer selection -->
+        <VBox spacing="6">
+            <Label text="Customer (optional)" styleClass="field-label"/>
+            <ComboBox fx:id="cmbCustomer" maxWidth="Infinity" styleClass="combo-field" promptText="Walk-in Customer"/>
+        </VBox>
+
+        <Separator/>
+
+        <!-- Discount and GST -->
+        <HBox spacing="10">
+            <VBox HBox.hgrow="ALWAYS" spacing="6">
+                <Label text="Discount (₹)" styleClass="field-label"/>
+                <TextField fx:id="fldDiscount" text="0" styleClass="input-field"/>
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS" spacing="6">
+                <Label text="GST %" styleClass="field-label"/>
+                <TextField fx:id="fldGstRate" text="0" styleClass="input-field"/>
+            </VBox>
+        </HBox>
+
+        <Separator/>
+
+        <!-- Totals -->
+        <VBox spacing="8" styleClass="totals-box">
+            <HBox><Label text="Subtotal:" styleClass="total-label" HBox.hgrow="ALWAYS"/>
+                  <Label fx:id="lblSubtotal" text="₹0.00" styleClass="total-value"/></HBox>
+            <HBox><Label text="Discount:" styleClass="total-label" HBox.hgrow="ALWAYS"/>
+                  <Label fx:id="lblDiscount" text="- ₹0.00" styleClass="total-value-discount"/></HBox>
+            <HBox><Label text="GST:" styleClass="total-label" HBox.hgrow="ALWAYS"/>
+                  <Label fx:id="lblGst" text="₹0.00 (0%)" styleClass="total-value"/></HBox>
+            <Separator/>
+            <HBox><Label text="GRAND TOTAL:" styleClass="grand-total-label" HBox.hgrow="ALWAYS"/>
+                  <Label fx:id="lblGrandTotal" text="₹0.00" styleClass="grand-total-value"/></HBox>
+        </VBox>
+
+        <Separator/>
+
+        <!-- Payment Method -->
+        <VBox spacing="8">
+            <Label text="Payment Method" styleClass="field-label"/>
+            <HBox spacing="16">
+                <RadioButton fx:id="rbCash" text="💵  Cash" styleClass="payment-radio">
+                    <toggleGroup><ToggleGroup fx:id="paymentGroup"/></toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="rbUpi" text="📱  UPI"  toggleGroup="$paymentGroup" styleClass="payment-radio"/>
+                <RadioButton fx:id="rbCard" text="💳  Card" toggleGroup="$paymentGroup" styleClass="payment-radio"/>
+            </HBox>
+        </VBox>
+
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <!-- Action buttons -->
+        <Button text="✅  Generate &amp; Save Bill" onAction="#handleGenerateBill"
+                styleClass="btn-generate" maxWidth="Infinity" prefHeight="50"/>
+        <HBox spacing="8">
+            <Button text="🖨  Print" onAction="#handlePrint"   styleClass="btn-outline" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            <Button text="💾  Save HTML" onAction="#handleSaveHtml" styleClass="btn-outline" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+        </HBox>
+
+    </VBox>
+</HBox>
