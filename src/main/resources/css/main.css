@@ -185,6 +185,26 @@
     -fx-background-color: #1a1d2e;
 }
 
+/* Settings ScrollPane — matches dark background, no border */
+.page-scroll-root {
+    -fx-background: #1a1d2e;
+    -fx-background-color: #1a1d2e;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+.page-scroll-root > .viewport {
+    -fx-background-color: #1a1d2e;
+}
+.page-scroll-root .scroll-bar:vertical .track,
+.page-scroll-root .scroll-bar:vertical .track-background {
+    -fx-background-color: #252842;
+}
+.page-scroll-root .scroll-bar:vertical .thumb {
+    -fx-background-color: #3a3f6b;
+    -fx-background-radius: 4px;
+}
+
+
 .page-title {
     -fx-text-fill: #e8eaf6;
     -fx-font-size: 22px;
