@@ -19,6 +19,12 @@ Built with **JavaFX 21 + SQLite** — no internet, no installation hassle, no te
 ### 📦 Products Management
 ![Products](screenshots/products.jpg)
 
+### 👥 Customers
+![Customers](screenshots/customers.jpg)
+
+### 🚚 Suppliers
+![Suppliers](screenshots/suppliers.jpg)
+
 ### 🏪 Inventory Management
 ![Inventory](screenshots/inventory.jpg)
 
@@ -27,6 +33,9 @@ Built with **JavaFX 21 + SQLite** — no internet, no installation hassle, no te
 
 ### 💾 Backup & Restore
 ![Backup](screenshots/backup.jpg)
+
+### ⚙️ Settings
+![Settings](screenshots/settings.jpg)
 
 ---
 
@@ -109,7 +118,7 @@ GroceryShopManagement/
 ├── src/main/resources/
 │   ├── fxml/                 # 11 FXML layout files
 │   └── css/                  # main.css (dark theme)
-├── screenshots/              # App screenshots
+├── screenshots/              # App screenshots (all 10 modules)
 ├── pom.xml                   # Maven configuration
 ├── run.bat                   # Quick run script
 ├── build-portable.bat        # Build portable EXE
